@@ -30,7 +30,8 @@ WORKDIR /builder
 RUN set -ex \
   && ls whl \
   && pip install --upgrade pip \
-  && pip install --no-index --find-links ./whl -r requirements.txt
+  && pip install --no-index --find-links ./whl -r requirements.txt \
+  && rm -rf /builder
 
 WORKDIR /root/sd/pywork
 
