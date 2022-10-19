@@ -17,7 +17,9 @@ RUN set -ex \
   && ls whl
 
 FROM python:3.7-alpine
+
 COPY --from=builder /builder /builder
+COPY supervisord.conf /etc/supervisord.conf 
 
 RUN set -ex \
   && apk add --update --no-cache \
@@ -40,8 +42,7 @@ RUN set -ex \
   && git clone https://gitcode.net/qq_32394351/dr_py.git
 
 WORKDIR /root/sd/pywork/dr_py
-
-COPY supervisord.conf /etc/supervisord.conf 
+VOLUME /root/sd/pywork/dr_py
 
 EXPOSE 5705 9001
 
