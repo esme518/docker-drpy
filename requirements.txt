@@ -1,0 +1,16 @@
+easydict
+flask-sqlalchemy==2.5.1
+flask==2.0.3 ;python_version < '3.7'
+flask==2.2.2 ;python_version >= '3.7'
+flask_migrate
+func_timeout
+gevent
+gunicorn ;python_version >= '3.6'
+js2py
+jsonpath
+psutil
+pyquery
+quickjs
+requests
+supervisor ;sys_platform != 'win32'
+ujson
