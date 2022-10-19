@@ -44,6 +44,7 @@ RUN set -ex \
 WORKDIR /root/sd/pywork/dr_py
 VOLUME /root/sd/pywork/dr_py
 
+ENV PYTHONUNBUFFERED=1
 EXPOSE 5705 9001
 
 CMD ["supervisord","-c","/etc/supervisord.conf"]
