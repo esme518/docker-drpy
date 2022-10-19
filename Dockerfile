@@ -4,7 +4,6 @@ RUN set -ex \
   && apk add --update --no-cache \
      alpine-sdk \
      libffi-dev \
-     libxml2-dev \
      libxslt-dev \
   && rm -rf /tmp/* /var/cache/apk/*
 
@@ -23,6 +22,8 @@ COPY --from=builder /builder /builder
 RUN set -ex \
   && apk add --update --no-cache \
      git \
+     libstdc++ \
+     libxslt \
   && rm -rf /tmp/* /var/cache/apk/*
 
 WORKDIR /builder
