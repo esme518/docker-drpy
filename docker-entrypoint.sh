@@ -13,9 +13,10 @@ elif [ ! -z "$AUTOUPDATE" ]; then
 fi
 
 if [ ! -f /etc/supervisord.conf ]; then
-	sed -i "s/INET_USERNAME/$INET_USERNAME/g" /etc/supervisord.init
-	sed -i "s/INET_PASSWORD/$INET_PASSWORD/g" /etc/supervisord.init
-	mv /etc/supervisord.init /etc/supervisord.conf
+	cp /etc/supervisord.init /etc/supervisord.conf
+	sed -i "s/INET_USERNAME/$INET_USERNAME/g" /etc/supervisord.conf
+	sed -i "s/INET_PASSWORD/$INET_PASSWORD/g" /etc/supervisord.conf
+	echo "Supervisord Initialized"
 fi
 
 exec "$@"
