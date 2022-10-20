@@ -19,7 +19,8 @@ RUN set -ex \
 FROM python:3.7-alpine
 
 COPY --from=builder /builder /builder
-COPY supervisord.conf /etc/supervisord.conf 
+COPY docker-entrypoint.sh /entrypoint.sh
+COPY supervisord.init /etc/supervisord.init
 
 RUN set -ex \
   && apk add --update --no-cache \
@@ -36,15 +37,15 @@ RUN set -ex \
   && pip install --no-index --find-links ./whl -r requirements.txt \
   && rm -rf /builder
 
-WORKDIR /root/sd/pywork
-
-RUN set -ex \
-  && git clone https://gitcode.net/qq_32394351/dr_py.git
-
 WORKDIR /root/sd/pywork/dr_py
 VOLUME /root/sd/pywork/dr_py
 
 ENV PYTHONUNBUFFERED=1
+ENV AUTOUPDATE=0
+ENV INET_USERNAME=user
+ENV INET_PASSWORD=123
+
 EXPOSE 5705 9001
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["supervisord","-c","/etc/supervisord.conf"]
