@@ -4,7 +4,7 @@ if [ ! -f app.py ]; then
 	git clone https://gitcode.net/qq_32394351/dr_py.git .
 	rm -rf base/rules.db
 	echo "App Initialized"
-elif [ -z "$AUTOUPDATE" ]; then
+elif [ ! -z "$AUTOUPDATE" ]; then
 	mv base/rules.db /tmp
 	ls -A1 | xargs rm -rf
 	git clone https://gitcode.net/qq_32394351/dr_py.git .
