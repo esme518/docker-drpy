@@ -48,4 +48,5 @@ ENV INET_PASSWORD=123
 EXPOSE 5705 9001
 
 ENTRYPOINT ["/entrypoint.sh"]
+
 CMD ["supervisord","-c","/etc/supervisord.conf"]
