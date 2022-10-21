@@ -5,12 +5,10 @@ if [ ! -f app.py ]; then
 	rm -rf base/rules.db
 	echo "App Initialized"
 elif [ -n "$AUTOUPDATE" ] && [ "$AUTOUPDATE" != 0 ]; then
-	mv base/rules.db /tmp
-	mv base/直播.txt /tmp
+	mv base/rules.db base/直播.txt /tmp
 	ls -A1 | xargs rm -rf
 	git clone -q https://gitcode.net/qq_32394351/dr_py.git .
-	mv -f /tmp/rules.db base/rules.db
-	mv -f /tmp/直播.txt base/直播.txt
+	mv -f /tmp/rules.db /tmp/直播.txt base/
 	echo "App Updated"
 fi
 
