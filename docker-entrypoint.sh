@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 if [ ! -f app.py ]; then
 	git clone -q https://gitcode.net/qq_32394351/dr_py.git .
