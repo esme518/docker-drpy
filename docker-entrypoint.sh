@@ -2,14 +2,15 @@
 set -e
 
 if [ ! -f app.py ]; then
-	git clone -q ${REPO_URL} .
-	rm -rf base/rules.db
+	git clone --depth 1 -q ${REPO_URL} .
+	rm -rf .git* base/rules.db
 	echo "App Initialized"
 	echo "Version $(cat js/version.txt)"
 elif [ -n "$AUTOUPDATE" ] && [ "$AUTOUPDATE" != 0 ]; then
 	mv base/rules.db base/直播.txt /tmp
 	ls -A1 | xargs rm -rf
-	git clone -q ${REPO_URL} .
+	git clone --depth 1 -q ${REPO_URL} .
+	rm -rf .git*
 	mv -f /tmp/rules.db /tmp/直播.txt base/
 	echo "App Updated"
 	echo "Version $(cat js/version.txt)"
