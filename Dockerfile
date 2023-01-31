@@ -41,6 +41,7 @@ RUN set -ex \
   && ls whl \
   && pip install --upgrade pip \
   && pip install --no-index --find-links ./whl -r requirements.txt \
+  && pip list \
   && rm -rf /builder
 
 WORKDIR /root/sd/pywork/dr_py
