@@ -1,8 +1,9 @@
-easydict
 flask-sqlalchemy==2.5.1
 flask==2.2.2
-flask_migrate
-func_timeout
+sqlalchemy==1.4.46
+easydict
+flask-migrate
+func-timeout
 gevent
 gunicorn
 js2py
