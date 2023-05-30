@@ -42,7 +42,7 @@ RUN set -ex \
   && pip install --upgrade pip \
   && pip install --no-index --find-links ./whl -r requirements.txt \
   && pip list \
-  && rm -rf /builder
+  && rm -rf /builder /root/.cache/*
 
 WORKDIR /root/sd/pywork/dr_py
 VOLUME /root/sd/pywork/dr_py
