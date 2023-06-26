@@ -26,7 +26,7 @@ COPY --from=builder /builder /builder
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY supervisord.init /etc/supervisord.init
 
-ENV REPO_URL https://ghproxy.com/https://github.com/hjdhnx/dr_py.git
+ENV REPO_URL https://github.com/hjdhnx/dr_py.git
 
 RUN set -ex \
   && apk add --update --no-cache \
