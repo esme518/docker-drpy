@@ -55,7 +55,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: type=raw,value=arm-latest
+          tags: type=raw,value=armv7-latest
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -206,5 +206,5 @@ jobs:
 
       - name: Combine and push Docker images
         run: |
-          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm-latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-latest
+          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:armv7-latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-latest -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-latest
           docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
