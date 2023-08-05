@@ -17,7 +17,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build-arm-image:
+  build-armv7-image:
 
     runs-on: ubuntu-latest
     permissions:
@@ -177,7 +177,7 @@ jobs:
 
     runs-on: ubuntu-latest
     needs:
-      - build-arm-image
+      - build-armv7-image
       - build-arm64-image
       - build-amd64-image
     permissions:
