@@ -1,6 +1,7 @@
 flask-sqlalchemy==2.5.1
-flask==2.2.2
-sqlalchemy==1.4.46
+flask==2.2.5
+sqlalchemy==1.4.51
+Werkzeug==2.3.8
 easydict
 flask-migrate
 func-timeout
