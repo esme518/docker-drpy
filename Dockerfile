@@ -16,14 +16,16 @@ RUN set -ex \
        python-${version}-dev \
        build-base
 
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
 WORKDIR /builder
 COPY requirements.txt /builder
 
 RUN set -ex \
   && pip install --upgrade pip \
-  && mkdir whl \
-  && pip wheel -r requirements.txt -w ./whl \
-  && ls whl
+  && pip install -r requirements.txt \
+  && pip list
 
 FROM cgr.dev/chainguard/wolfi-base
 
@@ -34,7 +36,9 @@ RUN set -ex \
        python-${version} \
        py${version}-pip
 
-COPY --from=builder /builder /builder
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:$PATH"
+
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY supervisord.init /etc/supervisord.init
 
@@ -44,15 +48,6 @@ RUN set -ex \
   && apk add --update --no-cache \
      git \
   && rm -rf /tmp/* /var/cache/apk/*
-
-WORKDIR /builder
-
-RUN set -ex \
-  && ls whl \
-  && pip install --upgrade pip \
-  && pip install --no-index --find-links ./whl -r requirements.txt \
-  && pip list \
-  && rm -rf /builder /root/.cache/*
 
 WORKDIR /root/sd/pywork/dr_py
 VOLUME /root/sd/pywork/dr_py
