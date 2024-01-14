@@ -31,8 +31,6 @@ ENV REPO_URL https://github.com/hjdhnx/dr_py.git
 RUN set -ex \
   && apk add --update --no-cache \
      git \
-     libstdc++ \
-     libxslt \
   && rm -rf /tmp/* /var/cache/apk/*
 
 WORKDIR /builder
