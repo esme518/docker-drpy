@@ -2,14 +2,19 @@
 # Dockerfile for dr_py
 #
 
-FROM python:3.10-alpine as builder
+FROM cgr.dev/chainguard/wolfi-base as builder
+
+ARG version=3.10
 
 RUN set -ex \
-  && apk add --update --no-cache \
-     alpine-sdk \
-     libffi-dev \
-     libxslt-dev \
-  && rm -rf /tmp/* /var/cache/apk/*
+    && apk add --update --no-cache \
+       python-${version} \
+       py${version}-pip
+
+RUN set -ex \
+    && apk add --update --no-cache \
+       python-${version}-dev \
+       build-base
 
 WORKDIR /builder
 COPY requirements.txt /builder
@@ -20,7 +25,14 @@ RUN set -ex \
   && pip wheel -r requirements.txt -w ./whl \
   && ls whl
 
-FROM python:3.10-alpine
+FROM cgr.dev/chainguard/wolfi-base
+
+ARG version=3.10
+
+RUN set -ex \
+    && apk add --update --no-cache \
+       python-${version} \
+       py${version}-pip
 
 COPY --from=builder /builder /builder
 COPY docker-entrypoint.sh /entrypoint.sh
