@@ -18,6 +18,8 @@ RUN set -ex \
 
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /builder
 COPY requirements.txt /builder
@@ -38,6 +40,7 @@ RUN set -ex \
 
 COPY --from=builder /venv /venv
 ENV PATH="/venv/bin:$PATH"
+ENV PYTHONUNBUFFERED=1
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY supervisord.init /etc/supervisord.init
@@ -52,7 +55,6 @@ RUN set -ex \
 WORKDIR /root/sd/pywork/dr_py
 VOLUME /root/sd/pywork/dr_py
 
-ENV PYTHONUNBUFFERED=1
 ENV AUTOUPDATE=
 ENV INET_USERNAME=user
 ENV INET_PASSWORD=123
