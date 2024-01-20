@@ -2,19 +2,13 @@
 # Dockerfile for dr_py
 #
 
-FROM cgr.dev/chainguard/wolfi-base as builder
-
-ARG version=3.10
+FROM esme518/wolfi-base-python:3.10 as builder
 
 RUN set -ex \
-    && apk add --update --no-cache \
-       python-${version} \
-       py${version}-pip
-
-RUN set -ex \
-    && apk add --update --no-cache \
-       python-${version}-dev \
-       build-base
+  && apk add --update --no-cache \
+     build-base \
+     python-3.10-dev \
+  && rm -rf /tmp/* /var/cache/apk/*
 
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
@@ -29,14 +23,7 @@ RUN set -ex \
   && pip install -r requirements.txt \
   && pip list
 
-FROM cgr.dev/chainguard/wolfi-base
-
-ARG version=3.10
-
-RUN set -ex \
-    && apk add --update --no-cache \
-       python-${version} \
-       py${version}-pip
+FROM esme518/wolfi-base-python:3.10
 
 COPY --from=builder /venv /venv
 ENV PATH="/venv/bin:$PATH"
